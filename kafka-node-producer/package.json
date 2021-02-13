@@ -1,0 +1,14 @@
+{
+  "name": "kafka-node-producer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "author": "kelvinoliveira",
+  "license": "MIT",
+  "dependencies": {
+    "kafkajs": "^1.15.0"
+  }
+}
