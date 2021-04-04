@@ -2,7 +2,7 @@
 
 An example of Kafka with [Node.js](https://nodejs.org) as producer, [Node.js](https://quarkus.io) as consumers SSE streaming to EventSource JavaScript
 
-**This example was based in this [project](https://github.com/higorrg/kafka-quarkus-js)**
+**This project was based in this other [project](https://github.com/higorrg/kafka-quarkus-js) made with [Quarkus](https://quarkus.io)
 
 ## Architecture
 
@@ -34,7 +34,7 @@ Initialize the Kafka stack by running this command
 ./start-kafka.sh
 ```
 
-### Create Temperatura Topic
+### Create Temperature Topic
 
 Create the temperature topic by running this command
 
