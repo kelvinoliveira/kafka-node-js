@@ -9,6 +9,8 @@
   "author": "kelvinoliveira",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1",
+    "express-sse": "^0.5.3",
     "kafkajs": "^1.15.0"
   }
 }

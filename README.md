@@ -8,7 +8,7 @@ An example of Kafka with [Node.js](https://nodejs.org) as producer, [Node.js](ht
 
 The ideia is to publish Kelvin temperatures in the "temperature" Kafka Topic, then start two instances of the consumer project one to consume and convert from Kelvin to Celsius and the other to consume and convert from Kelvin to Fahrenheit.
 
-After running the scripts described below, two Web Apps will be available one at http://0.0.0.0:8082/ and the other at http://0.0.0.0:8083/
+After running the scripts described below, two Web Apps will be available one at http://localhost:8092/ and the other at http://localhost:8093/
 
 The consumer app is configured in application.properties where the name of the temperature and the formula to convert from Kelvin are set.
 
@@ -93,6 +93,6 @@ kafka-node-consumer/celsius.sh
 kafka-node-consumer/fahrenheit.sh
 ```
 
-[Access Consumer in Celsius](http://0.0.0.0:8082/)
+[Access Consumer in Celsius](http://localhost:8092/)
 
-[Access Consumer in Fahrenheit](http://0.0.0.0:8083/)
+[Access Consumer in Fahrenheit](http://localhost:8093/)
