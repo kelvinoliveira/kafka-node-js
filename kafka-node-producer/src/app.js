@@ -1,27 +1,15 @@
-const { Kafka } = require('kafkajs')
+const { KafkaProducerService } = require('./services/kafka-producer-service');
 
-const kafka = new Kafka({
-  clientId: 'kakfa-node-js',
-  brokers: ['0.0.0.0:9092', '0.0.0.0:9092']
-});
-
-const producer = kafka.producer();
-
-const sendMessage = async () => {
-  const kelvinTemperature = Math.floor(Math.random() * 100);
-
-  await producer.send({
-    topic: 'temperature',
-    messages: [
-      { value: kelvinTemperature.toString() },
-    ],
-  });
-};
+const kafkaTopic = process.env.KAFKA_TOPIC || 'temperature';
 
 const run = async () => {
+  const producer = new KafkaProducerService();
   await producer.connect();
 
-  setInterval(sendMessage, 1000);
+  setInterval(async () => {
+    const kelvinTemperature = Math.floor(Math.random() * 100);
+    await producer.sendMessage(kafkaTopic, kelvinTemperature.toString());
+  }, 1000);
 };
 
 run().catch(console.error);

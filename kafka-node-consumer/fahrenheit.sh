@@ -1,2 +1,6 @@
 #!/bin/bash
-KELVIN_DIFF=-457.87 TEMPERATURE_NAME=Fahrenheit node kafka-node-consumer/src/app.js
+cd kafka-node-consumer
+if [ ! -d node_modules ]; then
+  npm install
+fi
+KAFKA_TOPIC=temperature TEMPERATURE_NAME=Fahrenheit TEMPERATURE_KELVIN_DIFF=-457.87 node src/app.js

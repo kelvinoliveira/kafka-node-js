@@ -1,27 +1,21 @@
-const { Kafka } = require('kafkajs')
+const { KafkaConsumerService } = require('./services/kafka-consumer-service');
 
-const kafka = new Kafka({
-  clientId: 'kakfa-node-js',
-  brokers: ['0.0.0.0:9092', '0.0.0.0:9092']
-})
-
-const consumer = kafka.consumer({ groupId: 'kafka-node-js-group' });
-
-const readMessage = async ({ message }) => {
-  const kelvinTemperature = Number(message.value.toString());
-  const kelvinDiff = Number(process.env.KELVIN_DIFF || 0);
-
-  const temperatureName = process.env.TEMPERATURE_NAME;
-  const temperature = kelvinTemperature + kelvinDiff;
-
-  console.log({ temperatureName, temperature });
-}
+const kafkaTopic = process.env.KAFKA_TOPIC || 'temperature';
+const temperatureName = process.env.TEMPERATURE_NAME || 'kelvin';
+const temperatureKelvinDiff = Number(process.env.TEMPERATURE_KELVIN_DIFF || 0);
 
 const run = async () => {
-  await consumer.connect()
-  await consumer.subscribe({ topic: 'temperature' });
+  const consumer = new KafkaConsumerService(temperatureName.toLocaleLowerCase());
+  await consumer.connect();
 
-  await consumer.run({ eachMessage: readMessage });
-}
+  await consumer.readMessage(kafkaTopic, ({ message }) => {
+    const kelvinTemperature = Number(message.value.toString());
+
+    let temperature = kelvinTemperature + temperatureKelvinDiff;
+    temperature = Math.round(temperature * 100) / 100;
+
+    console.log({ kelvinTemperature, temperatureName, temperature });
+  });
+};
 
 run().catch(console.error);
